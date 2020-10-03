@@ -4,19 +4,20 @@ dotenv.config({
   path: process.cwd() + `/.env.${process.env.NODE_ENV}`
 });
 
+const isProduction = process.env.NODE_ENV === 'prd';
+
 export default {
   server: {
     port: parseInt(process.env.PORT)
   },
-  environment: process.env.NODE_ENV,
-  isProduction: process.env.NODE_ENV === 'prd',
+  isProduction,
   logger: {
-    level: process.env.NODE_ENV === 'prd' ? 'warn' : 'debug',
-    prettyPrint: process.env.NODE_ENV !== 'prd',
+    level: isProduction ? 'warn' : 'debug',
+    prettyPrint: !isProduction,
     name: process.env.SERVICE
   },
   cors: {
-    origin: "*"
+    origin: '*'
   },
   healthCheck: {
     exposeFailure: true,
@@ -26,11 +27,11 @@ export default {
 };
 
 export const logger = {
-  level: process.env.NODE_ENV === 'prod' ? 'info' : 'debug', //Other supported "trace","debug","info","warn","error","fatal" in this order
+  level: isProduction ? 'info' : 'debug', //Other supported "trace","debug","info","warn","error","fatal" in this order
   base: {
     name: 'Template'
   },
-  prettyPrint: process.env.NODE_ENV === 'prod' ? false : {
+  prettyPrint: isProduction ? false : {
     colorize: true,
     ignore: 'hostname,pid',
     translateTime: 'UTC:yyyy-mm-dd\'T\'HH:MM:ss',

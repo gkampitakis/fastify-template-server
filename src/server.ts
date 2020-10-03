@@ -1,8 +1,9 @@
 import fastify, { FastifyInstance } from 'fastify';
-import customHealthCheck from "fastify-custom-healthcheck";
-import config, { logger } from './config';
+import customHealthCheck from 'fastify-custom-healthcheck';
+import config from './config';
 import cors from 'fastify-cors';
-import Logger from './utils/logger'
+import Logger from './utils/logger';
+import registerRoutes from './routes';
 
 class Server {
   private server: FastifyInstance;
@@ -17,7 +18,7 @@ class Server {
       .register(cors, config.cors)
       .register(customHealthCheck, config.healthCheck)
 
-    // registerRoutes(this.server);
+    registerRoutes(this.server);
   }
 
   public start () {
@@ -28,4 +29,4 @@ class Server {
   }
 }
 
-export default new Server();
+export default Server;
