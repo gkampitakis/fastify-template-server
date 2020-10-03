@@ -13,6 +13,7 @@ module.exports = {
       "max": 2,
       "maxEOF": 1
     }],
+    "@typescript-eslint/no-var-requires": ["warn"],
     "@typescript-eslint/no-parameter-properties": ["off"],
     "@typescript-eslint/member-ordering": ["error", { "default": ["field", "constructor", "method"] }],
     "comma-dangle": ["error", "never"],

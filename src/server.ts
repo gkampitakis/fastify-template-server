@@ -1,6 +1,6 @@
 import fastify, { FastifyInstance } from 'fastify';
 import customHealthCheck from 'fastify-custom-healthcheck';
-import config from './config';
+import config from './utils/config';
 import cors from 'fastify-cors';
 import Logger from './utils/logger';
 import registerRoutes from './routes';
@@ -10,15 +10,21 @@ class Server {
 
   constructor () {
     this.server = fastify();
-    this.setup();
+
+    this.setup()
+      .then(() => this.addHealthChecks())
   }
 
-  private setup (): void {
-    this.server
-      .register(cors, config.cors)
-      .register(customHealthCheck, config.healthCheck)
-
+  private setup () {
     registerRoutes(this.server);
+
+    return this.server
+      .register(cors, config.cors)
+      .register(customHealthCheck, config.healthCheck);
+  }
+
+  private addHealthChecks () {
+    this.server.addHealthCheck('templateCheck', () => true);
   }
 
   public start () {

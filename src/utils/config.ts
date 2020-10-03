@@ -11,11 +11,6 @@ export default {
     port: parseInt(process.env.PORT)
   },
   isProduction,
-  logger: {
-    level: isProduction ? 'warn' : 'debug',
-    prettyPrint: !isProduction,
-    name: process.env.SERVICE
-  },
   cors: {
     origin: '*'
   },
