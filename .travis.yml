@@ -1,0 +1,19 @@
+language: generic
+sudo: required
+services:
+  - docker
+
+branches:
+  only:
+    - master
+    - type=pull_request
+
+before_install:
+  - docker build -t gkabitakis/fastify-template-server .
+
+deploy:
+  provider: script
+  skip_cleanup: true
+  script: bash docker_push
+  on:
+    branch: master
