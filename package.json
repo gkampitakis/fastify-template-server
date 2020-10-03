@@ -1,0 +1,44 @@
+{
+  "name": "fastify-template-server",
+  "version": "1.0.0",
+  "description": "Template for spinning up a fastify server",
+  "main": "dist/server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc",
+    "start": "NODE_ENV=prd node dist/index.js",
+    "start:dev": "NODE_ENV=dev ts-node-dev index.ts --poll --respawn --transpileOnly",
+    "lint": "eslint src/**/*.ts",
+    "clean": "rm -rf dist coverage"
+  },
+  "keywords": [
+    "fastify",
+    "nodejs",
+    "server",
+    "template",
+    "typescript"
+  ],
+  "dependencies": {
+    "dotenv": "8.2.0",
+    "fastify": "3.5.0",
+    "fastify-cors": "4.1.0",
+    "fastify-custom-healthcheck": "1.1.4",
+    "pino": "6.6.1",
+    "pino-pretty": "4.2.1"
+  },
+  "devDependencies": {
+    "@types/node": "14.11.2",
+    "@types/pino": "6.3.2",
+    "typescript": "4.0.3",
+    "@typescript-eslint/eslint-plugin": "^4.3.0",
+    "@typescript-eslint/parser": "^4.3.0",
+    "eslint": "^7.10.0",
+    "ts-jest": "^26.4.1",
+    "ts-node-dev": "1.0.0-pre.63",
+    "@types/dotenv": "8.2.0",
+    "jest": "^26.4.2",
+    "@types/jest": "^26.0.14"
+  },
+  "author": "gkampitakis",
+  "license": "ISC"
+}
