@@ -7,6 +7,7 @@
 [![Ask Me Anything !](https://img.shields.io/badge/Ask%20me-anything-1abc9c.svg)](https://twitter.com/g_kampitakis)
 
 
+
 ## Description 
 
 A template fastify server with basic functionality and structure ready to fork and spin up a server.
