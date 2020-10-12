@@ -24,7 +24,7 @@
     "fastify-cors": "4.1.0",
     "fastify-custom-healthcheck": "1.1.4",
     "pino": "6.6.1",
-    "pino-pretty": "4.2.1"
+    "pino-pretty": "4.3.0"
   },
   "devDependencies": {
     "@types/node": "14.11.2",
