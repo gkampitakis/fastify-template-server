@@ -3,7 +3,7 @@ import customHealthCheck from 'fastify-custom-healthcheck';
 import config from './utils/config';
 import cors from 'fastify-cors';
 import Logger from './utils/logger';
-import registerRoutes from './routes';
+import registeredRoutes from './routes';
 
 class Server {
   private server: FastifyInstance;
@@ -16,7 +16,7 @@ class Server {
   }
 
   private setup () {
-    registerRoutes(this.server);
+    this.server.register(registeredRoutes);
 
     return this.server
       .register(cors, config.cors)

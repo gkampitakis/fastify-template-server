@@ -70,9 +70,9 @@ describe('Server', () => {
     it('Should register routes', () => {
       new Server();
 
-      expect(registerRoutesSpy).toHaveBeenCalled();
+      expect(registerSpy).toHaveBeenCalledTimes(3);
+      expect(registerSpy.mock.calls[0][0]).toEqual(expect.any(Function));
     });
-
   });
 
   describe('When call start method', () => {

@@ -11,7 +11,7 @@ export default function fastify () {
 
       registerSpy(...args);
 
-      if (settings.registerCounter > 1) {
+      if (settings.registerCounter > 2) {
         return Promise.resolve(this);
       }
 

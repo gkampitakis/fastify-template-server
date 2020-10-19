@@ -1,15 +1,9 @@
-import { FastifyInstance } from 'fastify';
+import { FastifyInstance, FastifyError, FastifyRequest } from 'fastify';
 import Controller from './controller';
 
-function templateRoute (prefix: string) {
+export default (fastify: FastifyInstance, options: unknown, done: (err?: FastifyError) => void) => {
+  fastify.get('/', (req, res) => Controller.defaultRoute(req, res));
+  fastify.get('/hello/:name', (req: FastifyRequest<{ Params: { name: string } }>, res) => Controller.helloRoute(req, res));
 
-  return function (server: FastifyInstance, options?: unknown) {
-
-    const controller = new Controller();
-
-    server.get(`${prefix}`, (req, res) => controller.defaultRoute(req, res));
-    server.get(`${prefix}/hello/:name`, (req, res) => controller.helloRoute(req, res));
-  }
+  done();
 }
-
-export default templateRoute;

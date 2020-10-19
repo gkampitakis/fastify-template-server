@@ -1,5 +1,8 @@
-import templateRoute from './template';
+import { FastifyError, FastifyInstance } from 'fastify';
+import templateRoutes from './template';
 
-export default {
-  template: templateRoute('/template')
+export default (fastify: FastifyInstance, options: unknown, done: (err?: FastifyError) => void) => {
+  fastify.register(templateRoutes, { prefix: '/template' });
+
+  done();
 };

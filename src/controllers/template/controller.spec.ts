@@ -17,16 +17,12 @@ describe('Template Controller', () => {
   });
 
   it('defaultRoute', () => {
-    const controller = new Controller();
-
-    controller.defaultRoute(request, response);
+    Controller.defaultRoute(request, response);
     expect(sendSpy).toHaveBeenNthCalledWith(1,'Hello World From template');
   });
 
   it('helloRoute', () => {
-    const controller = new Controller();
-
-    controller.helloRoute(request, response);
+    Controller.helloRoute(request, response);
     expect(sendSpy).toHaveBeenNthCalledWith(1,'Hello Mr mock');
   });
 });
