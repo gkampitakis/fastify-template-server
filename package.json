@@ -34,7 +34,7 @@
     "@typescript-eslint/parser": "^4.3.0",
     "eslint": "^7.10.0",
     "ts-jest": "^26.4.1",
-    "ts-node-dev": "1.0.0-pre.63",
+    "ts-node-dev": "1.0.0",
     "jest": "^26.4.2",
     "@types/jest": "^26.0.14"
   },
