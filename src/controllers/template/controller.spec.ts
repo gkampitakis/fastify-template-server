@@ -18,11 +18,11 @@ describe('Template Controller', () => {
 
   it('defaultRoute', () => {
     Controller.defaultRoute(request, response);
-    expect(sendSpy).toHaveBeenNthCalledWith(1,'Hello World From template');
+    expect(sendSpy).toHaveBeenNthCalledWith(1, 'Hello World From template');
   });
 
   it('helloRoute', () => {
     Controller.helloRoute(request, response);
-    expect(sendSpy).toHaveBeenNthCalledWith(1,'Hello Mr mock');
+    expect(sendSpy).toHaveBeenNthCalledWith(1, 'Hello Mr mock');
   });
 });

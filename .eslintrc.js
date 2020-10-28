@@ -3,6 +3,7 @@ module.exports = {
   extends: ["plugin:@typescript-eslint/recommended"],
   plugins: ["@typescript-eslint"],
   rules: {
+    "@typescript-eslint/explicit-module-boundary-types": "off",
     "sort-imports": ["error", {
       "ignoreCase": false,
       "ignoreDeclarationSort": true,

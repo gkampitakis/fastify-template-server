@@ -12,7 +12,7 @@ class Server {
     this.server = fastify();
 
     this.setup()
-      .then(() => this.addHealthChecks())
+      .then(() => this.addHealthChecks());
   }
 
   private setup () {
@@ -31,7 +31,7 @@ class Server {
     return this.server.listen(config.server.port, '0.0.0.0')
       .then(() => {
         Logger.info(`🚀 Server started on port ${config.server.port}`);
-      })
+      });
   }
 }
 
