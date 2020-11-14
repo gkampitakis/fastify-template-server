@@ -52,3 +52,11 @@ docker run -p <host-port>:<server-port> --name fastify-template -v /app/node_mod
 ```bash
 docker run -p <host-port>:<server-port> --name fastify-template fastify-template
 ```
+
+## License 
+
+MIT License
+
+<p align="center">
+✌️ <a href="https://github.com/gkampitakis/fastify-template-server/issues/new">For any questions or issues</a> ✌️
+</p>
