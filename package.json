@@ -21,7 +21,7 @@
   "dependencies": {
     "dotenv": "8.2.0",
     "fastify": "3.8.0",
-    "fastify-cors": "4.1.0",
+    "fastify-cors": "5.0.0",
     "fastify-custom-healthcheck": "1.2.0",
     "pino": "6.7.0",
     "pino-pretty": "4.3.0"
