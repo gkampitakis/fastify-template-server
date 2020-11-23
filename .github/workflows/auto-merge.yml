@@ -1,0 +1,13 @@
+name: Auto Merge
+on: [pull_request]
+
+jobs:
+  approve:
+    name: Auto merge dependabot Prs
+    if: ${{ github.actor == 'dependabot[bot]' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: gkampitakis/dependabot-auto-merge@v1
+        with:
+          github-token: ${{secrets.github_token}}
+          update-type: 'minor'
