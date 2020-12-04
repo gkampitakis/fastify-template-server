@@ -18,6 +18,22 @@ export default {
     exposeFailure: true,
     info: { Service: 'Template' },
     path: '/api/health'
+  },
+  kafka: {
+    producer: {
+      'metadata.broker.list': process.env.KAFKA_URL,
+      'group.id': process.env.KAFKA_GROUP,
+      'fetch.wait.max.ms': 10,
+      'fetch.error.backoff.ms': 50,
+      'dr_cb': true
+    },
+    consumer: {
+      'metadata.broker.list': process.env.KAFKA_URL,
+      'group.id': process.env.KAFKA_GROUP,
+      'fetch.wait.max.ms': 10,
+      'fetch.error.backoff.ms': 50,
+      'auto.offset.reset': 'earliest'
+    }
   }
 };
 

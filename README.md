@@ -60,3 +60,6 @@ MIT License
 <p align="center">
 ✌️ <a href="https://github.com/gkampitakis/fastify-template-server/issues/new">For any questions or issues</a> ✌️
 </p>
+
+
+//TODO: add postman collection

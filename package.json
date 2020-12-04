@@ -6,7 +6,7 @@
   "scripts": {
     "test": "npm run clean && npm run lint && jest",
     "build": "tsc",
-    "start": "NODE_ENV=prd node dist/index.js",
+    "start": "NODE_ENV=dev node dist/index.js",
     "start:dev": "NODE_ENV=dev ts-node-dev index.ts --poll --respawn --transpileOnly",
     "lint": "eslint src/**/*.ts",
     "clean": "rm -rf dist coverage"
@@ -23,10 +23,11 @@
     "fastify": "3.8.0",
     "fastify-cors": "5.0.0",
     "fastify-custom-healthcheck": "1.2.0",
-    "pino": "6.7.0",
-    "pino-pretty": "4.3.0"
+    "fastify-kafka": "^0.3.0",
+    "pino": "6.7.0"
   },
   "devDependencies": {
+    "pino-pretty": "4.3.0",
     "@types/jest": "^26.0.15",
     "@types/node": "14.14.10",
     "@types/pino": "6.3.4",
