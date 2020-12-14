@@ -1,13 +1,11 @@
-name: Auto Merge
+name: CI workflow
 on: [pull_request]
 
 jobs:
-  approve:
-    name: Auto merge dependabot Prs
-    if: ${{ github.actor == 'dependabot[bot]' }}
+  automerge:
     runs-on: ubuntu-latest
     steps:
-      - uses: gkampitakis/dependabot-auto-merge@v1
+      - uses: fastify/github-action-merge-dependabot@v1
+        if: ${{ github.actor == 'dependabot[bot]' && github.event_name == 'pull_request' }}
         with:
           github-token: ${{secrets.github_token}}
-          update-type: 'minor'
