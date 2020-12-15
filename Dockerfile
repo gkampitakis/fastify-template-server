@@ -8,7 +8,7 @@ RUN npm install
 
 COPY . .
 
-RUN npm t && npm run build && npm prune --production && \
+RUN npm run build && npm prune --production && \
     mkdir release && \
     mv dist release && \
     mv .env.* release && \

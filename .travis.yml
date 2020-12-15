@@ -6,7 +6,6 @@ services:
 branches:
   only:
     - master
-    - type=pull_request
 
 before_install:
   - docker build -t gkabitakis/fastify-template-server .
