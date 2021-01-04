@@ -23,7 +23,7 @@
     "fastify": "3.9.2",
     "fastify-cors": "5.1.0",
     "fastify-custom-healthcheck": "1.2.1",
-    "pino": "6.8.0",
+    "pino": "6.9.0",
     "pino-pretty": "4.3.0"
   },
   "devDependencies": {
