@@ -1,4 +1,4 @@
-FROM node:alpine as build
+FROM node:lts-alpine as build
 
 WORKDIR /app
 
@@ -6,7 +6,7 @@ COPY package.json .
 
 RUN npm install
 
-COPY . .
+COPY --chown=node:node . .
 
 RUN npm run build && npm prune --production && \
     mkdir release && \
@@ -14,14 +14,16 @@ RUN npm run build && npm prune --production && \
     mv .env.* release && \
     mv node_modules release
 
-FROM node:alpine as production
+FROM node:lts-alpine as production
 
-ENV NODE_ENV prd
+RUN apk add dumb-init
+
+ENV NODE_ENV production
 
 WORKDIR /app
 
-COPY --from=build /app/release .
+COPY  --chown=node:node --from=build /app/release .
 
 USER node
 
-CMD node dist/index.js
+CMD ["dumb-init", "node", "dist/index.js"]

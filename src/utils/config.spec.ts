@@ -5,7 +5,7 @@ describe('Configuration', () => {
 
   describe('Production config', () => {
     it('Default config', () => {
-      process.env.NODE_ENV = 'prd';
+      process.env.NODE_ENV = 'production';
       const config = require('./config').default;
 
       expect(config).toEqual({
@@ -25,7 +25,7 @@ describe('Configuration', () => {
     });
 
     it('Logger', () => {
-      process.env.NODE_ENV = 'prd';
+      process.env.NODE_ENV = 'production';
 
       const { logger } = require('./config');
 

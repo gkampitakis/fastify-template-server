@@ -1,4 +1,4 @@
-import S from 'fluent-schema';
+import S from 'fluent-json-schema';
 import { FastifySchema } from 'fastify';
 
 export const defaultSchema: FastifySchema = {

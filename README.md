@@ -19,7 +19,7 @@ Inside this repo you can find `spec` test files. In `package.json` it is specifi
 
 In the root folder there is also two Dockerfiles, one for development `Dockerfile.dev` and the `Dockerfile` for production.
 
-Finally you can find to env files, `.env.prd` and `.env.dev`. Depending on the environment you start your server you pull the appropriate env values.
+Finally you can find to env files, `.env.production` and `.env.dev`. Depending on the environment you start your server you pull the appropriate env values.
 
 ## Usage
 
