@@ -25,6 +25,12 @@ export default function fastify () {
       listenSpy(...args);
 
       return Promise.resolve(this);
+    },
+    close (...args) {
+      console.log('test');
+      
+      closeSpy(...args);
+      return Promise.resolve(this);
     }
   }
 }
@@ -32,12 +38,14 @@ export default function fastify () {
 const constructorSpy = jest.fn(),
   registerSpy = jest.fn(),
   addHealthChecksSpy = jest.fn(),
-  listenSpy = jest.fn();
+  listenSpy = jest.fn(),
+  closeSpy = jest.fn();
 
 export {
   constructorSpy,
   registerSpy,
   addHealthChecksSpy,
+  closeSpy,
   listenSpy,
   settings
 };
