@@ -10,3 +10,7 @@ updates:
       - gkampitakis
     labels:
       - dependabot
+    commit-message:
+      prefix: fix
+      prefix-development: chore
+      include: scope
