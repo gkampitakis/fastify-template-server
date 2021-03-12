@@ -8,11 +8,11 @@ const isProduction = process.env.NODE_ENV === 'production';
 
 export default {
   server: {
-    port: parseInt(process.env.PORT)
+    port: parseInt(process.env.PORT || '4000')
   },
   isProduction,
   cors: {
-    origin: '*'
+    origin: false
   },
   healthCheck: {
     exposeFailure: true,
