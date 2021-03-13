@@ -23,7 +23,7 @@ export default {
 };
 
 export const logger: LoggerOptions = {
-  level: isProduction ? 'info' : 'debug', //Other supported "trace","debug","info","warn","error","fatal" in this order
+  level: isProduction ? 'warn' : 'debug', //Other supported "trace","debug","info","warn","error","fatal" in this order
   base: {
     name: 'Template'
   },

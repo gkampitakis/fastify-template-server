@@ -54,7 +54,7 @@ class Server {
 
       await sleep(config.shutdownDelay);
 
-      this.fastify.log.info(`Server shutting down with: ${signal}`);
+      this.fastify.log.warn(`Server shutting down with: ${signal}`);
 
       await this.fastify.close();
     };
