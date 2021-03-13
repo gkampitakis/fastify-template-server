@@ -1,13 +1,15 @@
 import S from 'fluent-json-schema';
-import { FastifySchema } from 'fastify';
+import { Schema } from '../../fastify.types';
 
-export const defaultSchema: FastifySchema = {
+export const defaultSchema: Schema = {
   response: {
     200: S.string()
   }
 };
 
-export const helloSchema: FastifySchema = {
+export const helloSchema: Schema = {
+  summary: 'Placeholder',
+  description: 'Placeholder description',
   querystring: S.object()
     .prop('name', S.string().minLength(1)),
   response: {

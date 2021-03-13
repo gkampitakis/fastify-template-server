@@ -1,65 +1,69 @@
-import fastify, { FastifyInstance } from 'fastify';
+import Fastify, { FastifyInstance } from 'fastify';
+import autoload from 'fastify-autoload';
 import customHealthCheck from 'fastify-custom-healthcheck';
-import config from './utils/config';
 import cors from 'fastify-cors';
-import Logger from './utils/logger';
-import registeredRoutes from './routes';
+import sensible from 'fastify-sensible';
+import closeWithGrace, { CloseWithGraceAsyncCallback } from 'close-with-grace';
+import path from 'path';
+import { promisify } from 'util';
+import config from './utils/config';
+import logger from './utils/logger';
+import routes from './controllers';
 
-const delay = (timeout: number) => new Promise((resolve) => setTimeout(resolve, timeout));
+const sleep = promisify(setTimeout);
 
 class Server {
-  private server: FastifyInstance;
+  fastify: FastifyInstance;
 
   constructor () {
-    this.server = fastify();
+    this.fastify = Fastify({
+      logger
+    });
 
     this.setup()
-      .then(() => this.addHealthChecks());
+      .then(() => {
+        this.addHealthChecks();
+        this.handleShutdown();
+      });
   }
 
   private setup () {
-    this.server.register(registeredRoutes);
-    this.gracefulShutdown();
+    this.fastify.decorate('isProduction', config.isProduction);
 
-    return this.server
+    return this.fastify
+      .register(sensible)
       .register(cors, config.cors)
+      .register(autoload, {
+        dir: path.resolve(__dirname, './plugins')
+      })
+      .register(routes)
       .register(customHealthCheck, config.healthCheck);
   }
 
   private addHealthChecks () {
-    this.server.addHealthCheck('templateCheck', () => true);
+    this.fastify.addHealthCheck('templateCheck', () => true);
   }
 
-  private gracefulShutdown () {
-    const shutdown = async () => {
-      Logger.info('Server gracefully shutting down');
+  private handleShutdown () {
+    if (!this.fastify.isProduction) return;
 
-      await delay(5000);
+    const fn: CloseWithGraceAsyncCallback = async ({ err, signal }) => {
+      if (err) {
+        process.exit(1);
+      }
 
-      this.server
-        .close()
-        .then(() => {
-          // NOTE: here you can close other open connections (e.g. db connections)
+      await sleep(config.shutdownDelay);
 
-          Logger.info('Server shutting down');
-          process.exit(0);
-        }, (e) => {
-          Logger.error(e);
-          process.exit(1);
-        });
+      this.fastify.log.warn(`Server shutting down with: ${signal}`);
+
+      await this.fastify.close();
     };
 
-    for (const signal of ['SIGTERM', 'SIGINT']) {
-      // Use once() so that double signals exits the app
-      process.once(signal as any, shutdown);
-    }
+    closeWithGrace(fn); // closeWithGrace has a default delay of 10 seconds
   }
 
   public start () {
-    return this.server.listen(config.server.port, '0.0.0.0')
-      .then(() => {
-        Logger.info(`🚀 Server started on port ${config.server.port}`);
-      });
+    return this.fastify.listen(config.server.port, '0.0.0.0');
   }
 }
 
