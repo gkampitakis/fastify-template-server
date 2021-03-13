@@ -1,8 +1,6 @@
 import dotenv from 'dotenv';
 
-dotenv.config({
-  path: process.cwd() + `/.env.${process.env.NODE_ENV}`
-});
+dotenv.config();
 
 const isProduction = process.env.NODE_ENV === 'production';
 

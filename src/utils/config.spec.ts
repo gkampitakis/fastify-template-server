@@ -4,9 +4,9 @@ describe('Configuration', () => {
   });
 
   describe('Production config', () => {
-    it('Default config', () => {
+    it('Default config', async () => {
       process.env.NODE_ENV = 'production';
-      const config = require('./config').default;
+      const { default: config } = await import('./config');
 
       expect(config).toEqual({
         server: {
@@ -14,20 +14,21 @@ describe('Configuration', () => {
         },
         isProduction: true,
         cors: {
-          origin: '*'
+          origin: false
         },
         healthCheck: {
           exposeFailure: true,
           info: { Service: 'Template' },
           path: '/api/health'
-        }
+        },
+        shutdownDelay: 5000
       });
     });
 
-    it('Logger', () => {
+    it('Logger', async () => {
       process.env.NODE_ENV = 'production';
 
-      const { logger } = require('./config');
+      const { logger } = await import('./config');
 
       expect(logger).toEqual({
         level: 'info',
@@ -40,9 +41,9 @@ describe('Configuration', () => {
   });
 
   describe('Development config', () => {
-    it('Default config', () => {
+    it('Default config', async () => {
       process.env.NODE_ENV = 'dev';
-      const config = require('./config').default;
+      const { default: config } = await import('./config');
 
       expect(config).toEqual({
         server: {
@@ -50,20 +51,21 @@ describe('Configuration', () => {
         },
         isProduction: false,
         cors: {
-          origin: '*'
+          origin: false
         },
         healthCheck: {
           exposeFailure: true,
           info: { Service: 'Template' },
           path: '/api/health'
-        }
+        },
+        shutdownDelay: 5000
       });
     });
 
-    it('Logger', () => {
+    it('Logger', async () => {
       process.env.NODE_ENV = 'dev';
 
-      const { logger } = require('./config');
+      const { logger } = await import('./config');
 
       expect(logger).toEqual({
         level: 'debug',

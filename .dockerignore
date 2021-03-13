@@ -4,4 +4,3 @@ README.md
 dist
 .github
 node_modules
-!.env.*
