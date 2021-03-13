@@ -70,6 +70,7 @@
       "!src/**/index.ts",
       "!src/utils/logger.ts",
       "!src/*.types.ts",
+      "!src/*.integration.ts",
       "!src/server.ts"
     ],
     "coverageThreshold": {

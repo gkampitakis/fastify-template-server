@@ -17,7 +17,7 @@ describe('Configuration', () => {
           origin: false
         },
         healthCheck: {
-          exposeFailure: true,
+          exposeFailure: false,
           info: { Service: 'Template' },
           path: '/api/health'
         },
@@ -31,10 +31,11 @@ describe('Configuration', () => {
       const { logger } = await import('./config');
 
       expect(logger).toEqual({
-        level: 'info',
+        level: 'warn',
         base: {
           name: 'Template'
         },
+        enabled: true,
         prettyPrint: false
       });
     });
@@ -72,6 +73,7 @@ describe('Configuration', () => {
         base: {
           name: 'Template'
         },
+        enabled: true,
         prettyPrint: {
           colorize: true,
           ignore: 'hostname,pid',
