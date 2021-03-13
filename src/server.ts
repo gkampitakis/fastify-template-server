@@ -1,4 +1,4 @@
-import fastify, { FastifyInstance } from 'fastify';
+import Fastify, { FastifyInstance } from 'fastify';
 import autoload from 'fastify-autoload';
 import customHealthCheck from 'fastify-custom-healthcheck';
 import cors from 'fastify-cors';
@@ -13,10 +13,10 @@ import routes from './controllers';
 const sleep = promisify(setTimeout);
 
 class Server {
-  private server: FastifyInstance;
+  fastify: FastifyInstance;
 
   constructor () {
-    this.server = fastify({
+    this.fastify = Fastify({
       logger
     });
 
@@ -28,9 +28,9 @@ class Server {
   }
 
   private setup () {
-    this.server.decorate('isProduction', config.isProduction);
+    this.fastify.decorate('isProduction', config.isProduction);
 
-    return this.server
+    return this.fastify
       .register(sensible)
       .register(cors, config.cors)
       .register(autoload, {
@@ -41,10 +41,12 @@ class Server {
   }
 
   private addHealthChecks () {
-    this.server.addHealthCheck('templateCheck', () => true);
+    this.fastify.addHealthCheck('templateCheck', () => true);
   }
 
   private handleShutdown () {
+    if (!this.fastify.isProduction) return;
+
     const fn: CloseWithGraceAsyncCallback = async ({ err, signal }) => {
       if (err) {
         process.exit(1);
@@ -52,16 +54,16 @@ class Server {
 
       await sleep(config.shutdownDelay);
 
-      this.server.log.info(`Server shutting down with: ${signal}`);
+      this.fastify.log.info(`Server shutting down with: ${signal}`);
 
-      await this.server.close();
+      await this.fastify.close();
     };
 
     closeWithGrace(fn); // closeWithGrace has a default delay of 10 seconds
   }
 
   public start () {
-    return this.server.listen(config.server.port, '0.0.0.0');
+    return this.fastify.listen(config.server.port, '0.0.0.0');
   }
 }
 
