@@ -18,7 +18,8 @@ export default {
     exposeFailure: true,
     info: { Service: 'Template' },
     path: '/api/health'
-  }
+  },
+  shutdownDelay: 5000
 };
 
 export const logger = {
