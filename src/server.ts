@@ -3,6 +3,8 @@ import autoload from 'fastify-autoload';
 import customHealthCheck from 'fastify-custom-healthcheck';
 import cors from 'fastify-cors';
 import sensible from 'fastify-sensible';
+import cookie from 'fastify-cookie';
+import session from 'fastify-session';
 import closeWithGrace, { CloseWithGraceAsyncCallback } from 'close-with-grace';
 import path from 'path';
 import { promisify } from 'util';
@@ -30,14 +32,24 @@ class Server {
   private setup () {
     this.fastify.decorate('isProduction', config.isProduction);
 
-    return this.fastify
-      .register(sensible)
-      .register(cors, config.cors)
-      .register(autoload, {
-        dir: path.resolve(__dirname, './plugins')
-      })
-      .register(routes)
-      .register(customHealthCheck, config.healthCheck);
+    this.fastify.register(sensible);
+    this.fastify.register(cors, config.cors);
+    this.fastify.register(autoload, {
+      dir: path.resolve(__dirname, './plugins')
+    });
+    this.fastify.register(cookie);
+    this.fastify.register(session, {
+      secret: 'a secret with minimum length of 32 characters', //TODO: create a secure secret
+      cookieName: 'user_session',
+      cookie: {
+        maxAge: 86400000 * 7, // 1 week
+        httpOnly: true,
+        secure: config.isProduction,
+        sameSite: 'strict'
+      }
+    });
+    this.fastify.register(routes);
+    return this.fastify.register(customHealthCheck, config.healthCheck);
   }
 
   private addHealthChecks () {
