@@ -22,7 +22,7 @@
   "dependencies": {
     "close-with-grace": "^1.1.0",
     "dotenv": "8.2.0",
-    "fastify": "3.14.1",
+    "fastify": "3.14.2",
     "fastify-autoload": "^3.6.0",
     "fastify-cors": "5.2.0",
     "fastify-custom-healthcheck": "1.2.1",
