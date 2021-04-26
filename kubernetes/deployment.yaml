@@ -40,5 +40,5 @@ spec:
   selector:
     component: server
   ports:
-    - port: 8081 # port to reach Service
+    - port: 8080 # port to reach Service
       targetPort: 8080 # port pointing to template-server

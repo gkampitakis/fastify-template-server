@@ -16,7 +16,7 @@ export default {
   },
   healthCheck: {
     exposeFailure: !isProduction,
-    info: { Service: 'Template' },
+    info: { Service: process.env.SERVICE || '' },
     path: '/api/health'
   },
   shutdownDelay: 5000
@@ -25,7 +25,7 @@ export default {
 export const logger: LoggerOptions = {
   level: isProduction ? 'warn' : 'debug', //Other supported "trace","debug","info","warn","error","fatal" in this order
   base: {
-    name: 'Template'
+    name: process.env.SERVICE || ''
   },
   enabled: !isTest,
   prettyPrint: isProduction ? false : {

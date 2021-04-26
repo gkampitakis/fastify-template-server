@@ -4,6 +4,7 @@ module.exports = {
       diagnostics: false
     }
   },
+  setupFiles: ['./src/setupTests.ts'],
   verbose: true,
   moduleFileExtensions: [
     'ts',

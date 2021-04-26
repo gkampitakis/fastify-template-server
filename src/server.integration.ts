@@ -1,9 +1,6 @@
 import ServerInstance from './server';
-import request from 'supertest';
-import { Server } from 'http';
 import { FastifyInstance } from 'fastify';
 
-let httpServer: Server;
 let fastify: FastifyInstance;
 
 describe('Server', () => {
@@ -13,10 +10,8 @@ describe('Server', () => {
   });
 
   beforeAll(async () => {
-    const { fastify: fastify } = new ServerInstance();
+    fastify = new ServerInstance().fastify;
     await fastify.ready();
-
-    httpServer = fastify.server;
   });
 
   afterAll(async () => {
@@ -24,25 +19,29 @@ describe('Server', () => {
   });
 
   it('Should register health check plugin', async () => {
-    const response = await request(httpServer)
-      .get('/api/health')
-      .expect('Content-Type', /json/)
-      .expect(200)
-      .send();
+    const response = await fastify.inject({
+      method: 'GET',
+      url: '/api/health'
+    });
 
-    expect(response.body).toEqual({
+    expect(JSON.parse(response.body)).toEqual({
       healthChecks: {
         templateCheck: 'HEALTHY'
       },
       stats: expect.any(Object),
-      info: { Service: 'Template' }
+      info: { Service: 'test service' }
     });
+    expect(response.statusCode).toBe(200);
+    expect(response.headers['content-type']).toMatch(/json/);
   });
 
   it('Should expose swagger docs', async () => {
-    await request(httpServer)
-      .get('/docs')
-      .expect(302);
+    const response = await fastify.inject({
+      method: 'GET',
+      url: '/docs'
+    });
+
+    expect(response.statusCode).toBe(302);
   });
 
   it('Should not expose swagger docs', async () => {
@@ -52,33 +51,37 @@ describe('Server', () => {
     const { fastify } = new ServerInstance();
     await fastify.ready();
 
-    await request(fastify.server)
-      .get('/docs')
-      .expect(404)
-      .send();
+    const response = await fastify.inject({
+      method: 'GET',
+      url: '/docs'
+    });
+
+    expect(response.statusCode).toBe(404);
 
     await fastify.close();
   });
 
   describe('Template', () => {
     it('Should call default Route', async () => {
-      const response = await request(httpServer)
-        .get('/template')
-        .expect('Content-Type', /text/)
-        .expect(200)
-        .send();
+      const response = await fastify.inject({
+        method: 'GET',
+        url: '/template'
+      });
 
-      expect(response.text).toBe('Hello World From template');
+      expect(response.body).toBe('Hello World From template');
+      expect(response.statusCode).toBe(200);
+      expect(response.headers['content-type']).toMatch(/text/);
     });
 
     it('Should call hello Route', async () => {
-      const response = await request(httpServer)
-        .get('/template/hello/test')
-        .expect('Content-Type', /text/)
-        .expect(200)
-        .send();
+      const response = await fastify.inject({
+        method: 'GET',
+        url: '/template/hello/test'
+      });
 
-      expect(response.text).toBe('Hello Mr test');
+      expect(response.body).toBe('Hello Mr test');
+      expect(response.statusCode).toBe(200);
+      expect(response.headers['content-type']).toMatch(/text/);
     });
   });
 });

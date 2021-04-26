@@ -7,6 +7,7 @@ function swaggerGenerator (fastify: FastifyInstance, opts: FastifyRegisterOption
   fastify.register(fastifySwagger, {
     routePrefix: '/docs',
     swagger: {
+      consumes: ['application/json'],
       info: {
         title: 'Fastify template server',
         version: _package.version,

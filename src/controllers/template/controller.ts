@@ -1,9 +1,9 @@
 import { FastifyReply, FastifyRequest } from 'fastify';
 
-export function defaultRoute (req: FastifyRequest, res: FastifyReply): void {
-  res.send('Hello World From template');
+export function defaultRoute (req: FastifyRequest, reply: FastifyReply) {
+  reply.send('Hello World From template');
 }
 
-export function helloRoute (req: FastifyRequest<{ Params: { name: string } }>, res: FastifyReply): void {
-  res.send(`Hello Mr ${req.params.name}`);
+export function helloRoute (req: FastifyRequest<{ Params: { name: string } }>, reply: FastifyReply) {
+  reply.send(`Hello Mr ${req.params.name}`);
 }

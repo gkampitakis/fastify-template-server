@@ -30,14 +30,13 @@ class Server {
   private setup () {
     this.fastify.decorate('isProduction', config.isProduction);
 
-    return this.fastify
-      .register(sensible)
-      .register(cors, config.cors)
-      .register(autoload, {
-        dir: path.resolve(__dirname, './plugins')
-      })
-      .register(routes)
-      .register(customHealthCheck, config.healthCheck);
+    this.fastify.register(sensible);
+    this.fastify.register(cors, config.cors);
+    this.fastify.register(autoload, {
+      dir: path.resolve(__dirname, './plugins')
+    });
+    this.fastify.register(routes);
+    return this.fastify.register(customHealthCheck, config.healthCheck);
   }
 
   private addHealthChecks () {
