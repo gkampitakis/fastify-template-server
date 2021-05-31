@@ -1,11 +1,13 @@
 describe('Configuration', () => {
   beforeEach(() => {
     jest.resetModules();
+    process.env.SERVICE = 'test service';
   });
 
   describe('Production config', () => {
     it('Default config', async () => {
       process.env.NODE_ENV = 'production';
+      process.env.SERVICE = '';
       const { default: config } = await import('./config');
 
       expect(config).toEqual({
@@ -18,7 +20,7 @@ describe('Configuration', () => {
         },
         healthCheck: {
           exposeFailure: false,
-          info: { Service: 'Template' },
+          info: { Service: '' },
           path: '/api/health'
         },
         shutdownDelay: 5000
@@ -33,7 +35,7 @@ describe('Configuration', () => {
       expect(logger).toEqual({
         level: 'warn',
         base: {
-          name: 'Template'
+          name: 'test service'
         },
         enabled: true,
         prettyPrint: false
@@ -56,7 +58,7 @@ describe('Configuration', () => {
         },
         healthCheck: {
           exposeFailure: true,
-          info: { Service: 'Template' },
+          info: { Service: 'test service' },
           path: '/api/health'
         },
         shutdownDelay: 5000
@@ -71,7 +73,7 @@ describe('Configuration', () => {
       expect(logger).toEqual({
         level: 'debug',
         base: {
-          name: 'Template'
+          name: 'test service'
         },
         enabled: true,
         prettyPrint: {
