@@ -31,7 +31,7 @@
     "fastify-swagger": "^4.7.0",
     "fluent-json-schema": "^3.0.0",
     "pino": "^6.11.3",
-    "pino-pretty": "^6.0.0"
+    "pino-pretty": "^7.0.0"
   },
   "devDependencies": {
     "@types/jest": "^27.0.1",
