@@ -2,7 +2,6 @@
 
 [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/gkampitakis/fastify-template-server/graphs/commit-activity)
 [![dependencies Status](https://status.david-dm.org/gh/gkampitakis/fastify-template-server.svg)](https://david-dm.org/gkampitakis/fastify-template-server)
-[![Build Status](https://travis-ci.com/gkampitakis/fastify-template-server.svg?branch=master)](https://travis-ci.com/gkampitakis/fastify-template-server)
 [![Ask Me Anything !](https://img.shields.io/badge/Ask%20me-anything-1abc9c.svg)](https://twitter.com/g_kampitakis)
 
 ## Description
