@@ -10,7 +10,8 @@
     "start": "NODE_ENV=production node dist/index.js",
     "dev": "NODE_ENV=dev ts-node-dev index.ts --poll --respawn --transpileOnly",
     "lint": "eslint src/**/*.ts",
-    "clean": "rm -rf dist coverage"
+    "clean": "rm -rf dist coverage",
+    "format": "prettier --write '**/*.ts'"
   },
   "keywords": [
     "fastify",
@@ -23,27 +24,30 @@
     "close-with-grace": "^1.1.0",
     "dotenv": "^10.0.0",
     "fastify": "3.22.1",
-    "fastify-autoload": "^3.7.1",
-    "fastify-cors": "^6.0.1",
+    "fastify-autoload": "^3.9.0",
+    "fastify-cors": "^6.0.2",
     "fastify-custom-healthcheck": "^2.0.0",
     "fastify-plugin": "^3.0.0",
-    "fastify-sensible": "^3.1.1",
-    "fastify-swagger": "^4.7.0",
-    "fluent-json-schema": "^3.0.0",
-    "pino": "^6.11.3",
-    "pino-pretty": "^7.0.0"
+    "fastify-sensible": "^3.1.2",
+    "fastify-swagger": "^4.12.6",
+    "fluent-json-schema": "^3.0.1",
+    "pino": "^7.0.5",
+    "pino-pretty": "^7.1.0"
   },
   "devDependencies": {
-    "@types/jest": "^27.0.1",
-    "@types/node": "^16.0.0",
-    "@types/pino": "^6.3.8",
-    "@typescript-eslint/eslint-plugin": "^4.25.0",
-    "@typescript-eslint/parser": "^4.25.0",
-    "eslint": "^7.27.0",
-    "jest": "^27.0.3",
-    "ts-jest": "^27.0.2",
-    "ts-node-dev": "^1.1.6",
-    "typescript": "^4.3.2"
+    "@types/jest": "^27.0.2",
+    "@types/node": "^16.11.6",
+    "@types/pino": "^6.3.12",
+    "@typescript-eslint/eslint-plugin": "^5.3.0",
+    "@typescript-eslint/parser": "^5.3.0",
+    "eslint": "^8.1.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "jest": "^27.3.1",
+    "prettier": "^2.4.1",
+    "ts-jest": "^27.0.7",
+    "ts-node-dev": "^1.1.8",
+    "typescript": "^4.4.4"
   },
   "jest": {
     "globals": {

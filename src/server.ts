@@ -15,19 +15,18 @@ const sleep = promisify(setTimeout);
 class Server {
   fastify: FastifyInstance;
 
-  constructor () {
+  constructor() {
     this.fastify = Fastify({
       logger
     });
 
-    this.setup()
-      .then(() => {
-        this.addHealthChecks();
-        this.handleShutdown();
-      });
+    this.setup().then(() => {
+      this.addHealthChecks();
+      this.handleShutdown();
+    });
   }
 
-  private setup () {
+  private setup() {
     this.fastify.decorate('isProduction', config.isProduction);
 
     this.fastify.register(sensible);
@@ -39,11 +38,11 @@ class Server {
     return this.fastify.register(customHealthCheck, config.healthCheck);
   }
 
-  private addHealthChecks () {
+  private addHealthChecks() {
     this.fastify.addHealthCheck('templateCheck', () => true);
   }
 
-  private handleShutdown () {
+  private handleShutdown() {
     if (!this.fastify.isProduction) return;
 
     const fn: CloseWithGraceAsyncCallback = async ({ err, signal }) => {
@@ -61,7 +60,7 @@ class Server {
     closeWithGrace(fn); // closeWithGrace has a default delay of 10 seconds
   }
 
-  public start () {
+  public start() {
     return this.fastify.listen(config.server.port, '0.0.0.0');
   }
 }

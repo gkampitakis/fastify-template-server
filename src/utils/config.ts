@@ -1,5 +1,5 @@
 import dotenv from 'dotenv';
-import { LoggerOptions } from 'pino';
+import { P } from 'pino';
 
 dotenv.config();
 
@@ -22,16 +22,21 @@ export default {
   shutdownDelay: 5000
 };
 
-export const logger: LoggerOptions = {
-  level: isProduction ? 'warn' : 'debug', //Other supported "trace","debug","info","warn","error","fatal" in this order
+export const logger: P.LoggerOptions = {
+  level: isProduction ? 'info' : 'debug', //Other supported "trace","debug","info","warn","error","fatal" in this order
   base: {
     name: process.env.SERVICE
   },
   enabled: !isTest,
-  prettyPrint: isProduction ? false : {
-    colorize: true,
-    ignore: 'hostname,pid',
-    translateTime: 'UTC:yyyy-mm-dd\'T\'HH:MM:ss',
-    levelFirst: true
-  }
+  ...(!isProduction && {
+    transport: {
+      target: 'pino-pretty',
+      options: {
+        colorize: true,
+        ignore: 'hostname,pid',
+        translateTime: "UTC:yyyy-mm-dd'T'HH:MM:ss",
+        levelFirst: true
+      }
+    }
+  })
 };

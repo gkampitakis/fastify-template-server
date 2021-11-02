@@ -3,7 +3,11 @@ import fp from 'fastify-plugin';
 import fastifySwagger from 'fastify-swagger';
 import _package from '../../../package.json';
 
-function swaggerGenerator (fastify: FastifyInstance, opts: FastifyRegisterOptions<unknown>, done: (err?: FastifyError) => void) {
+function swaggerGenerator(
+  fastify: FastifyInstance,
+  opts: FastifyRegisterOptions<unknown>,
+  done: (err?: FastifyError) => void
+) {
   fastify.register(fastifySwagger, {
     routePrefix: '/docs',
     swagger: {

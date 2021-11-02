@@ -79,7 +79,7 @@ describe('Configuration', () => {
         prettyPrint: {
           colorize: true,
           ignore: 'hostname,pid',
-          translateTime: 'UTC:yyyy-mm-dd\'T\'HH:MM:ss',
+          translateTime: "UTC:yyyy-mm-dd'T'HH:MM:ss",
           levelFirst: true
         }
       });

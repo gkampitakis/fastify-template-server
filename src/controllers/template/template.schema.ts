@@ -10,8 +10,7 @@ export const defaultSchema: Schema = {
 export const helloSchema: Schema = {
   summary: 'Placeholder',
   description: 'Placeholder description',
-  params: S.object()
-    .prop('name', S.string().minLength(1)),
+  params: S.object().prop('name', S.string().minLength(1)),
   response: {
     200: S.string()
   }
