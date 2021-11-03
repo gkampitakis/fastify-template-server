@@ -1,0 +1,70 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Configuration Development config Default config 1`] = `
+Object {
+  "cors": Object {
+    "origin": false,
+  },
+  "healthCheck": Object {
+    "exposeFailure": true,
+    "info": Object {
+      "Service": "test service",
+    },
+    "path": "/api/health",
+  },
+  "isProduction": false,
+  "server": Object {
+    "port": 4000,
+  },
+  "shutdownDelay": 5000,
+}
+`;
+
+exports[`Configuration Development config Logger 1`] = `
+Object {
+  "base": Object {
+    "name": "test service",
+  },
+  "enabled": true,
+  "level": "debug",
+  "transport": Object {
+    "options": Object {
+      "colorize": true,
+      "ignore": "hostname,pid",
+      "levelFirst": true,
+      "translateTime": "UTC:yyyy-mm-dd'T'HH:MM:ss",
+    },
+    "target": "pino-pretty",
+  },
+}
+`;
+
+exports[`Configuration Production config Default config 1`] = `
+Object {
+  "cors": Object {
+    "origin": false,
+  },
+  "healthCheck": Object {
+    "exposeFailure": false,
+    "info": Object {
+      "Service": "",
+    },
+    "path": "/api/health",
+  },
+  "isProduction": true,
+  "server": Object {
+    "port": 4000,
+  },
+  "shutdownDelay": 5000,
+}
+`;
+
+exports[`Configuration Production config Logger 1`] = `
+Object {
+  "base": Object {
+    "name": "test service",
+  },
+  "enabled": true,
+  "level": "info",
+}
+`;
