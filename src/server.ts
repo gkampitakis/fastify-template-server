@@ -1,8 +1,8 @@
 import Fastify, { FastifyInstance } from 'fastify';
-import autoload from 'fastify-autoload';
+import autoload from '@fastify/autoload';
 import customHealthCheck from 'fastify-custom-healthcheck';
-import cors from 'fastify-cors';
-import sensible from 'fastify-sensible';
+import cors from '@fastify/cors';
+import sensible from '@fastify/sensible';
 import closeWithGrace, { CloseWithGraceAsyncCallback } from 'close-with-grace';
 import path from 'path';
 import { promisify } from 'util';

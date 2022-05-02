@@ -1,6 +1,6 @@
 import { FastifyError, FastifyInstance, FastifyRegisterOptions } from 'fastify';
 import fp from 'fastify-plugin';
-import fastifySwagger from 'fastify-swagger';
+import fastifySwagger from '@fastify/swagger';
 import _package from '../../../package.json';
 
 function swaggerGenerator(
