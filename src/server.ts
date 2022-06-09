@@ -1,16 +1,12 @@
 import Fastify, { FastifyInstance } from 'fastify';
 import autoload from '@fastify/autoload';
-import customHealthCheck from 'fastify-custom-healthcheck';
 import cors from '@fastify/cors';
 import sensible from '@fastify/sensible';
-import closeWithGrace, { CloseWithGraceAsyncCallback } from 'close-with-grace';
 import path from 'path';
-import { promisify } from 'util';
-import config from './utils/config';
-import logger from './utils/logger';
+import closeWithGrace, { CloseWithGraceAsyncCallback } from 'close-with-grace';
+import customHealthCheck from 'fastify-custom-healthcheck';
+import { config, logger } from './utils';
 import routes from './controllers';
-
-const sleep = promisify(setTimeout);
 
 class Server {
   fastify: FastifyInstance;
@@ -50,8 +46,6 @@ class Server {
         process.exit(1);
       }
 
-      await sleep(config.shutdownDelay);
-
       this.fastify.log.warn(`Server shutting down with: ${signal}`);
 
       await this.fastify.close();
@@ -61,7 +55,10 @@ class Server {
   }
 
   public start() {
-    return this.fastify.listen(config.server.port, '0.0.0.0');
+    return this.fastify.listen({
+      port: config.server.port,
+      host: '0.0.0.0'
+    });
   }
 }
 

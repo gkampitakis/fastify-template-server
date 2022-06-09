@@ -1,8 +1,6 @@
 # Fastify Template Server
 
 [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/gkampitakis/fastify-template-server/graphs/commit-activity)
-[![dependencies Status](https://status.david-dm.org/gh/gkampitakis/fastify-template-server.svg)](https://david-dm.org/gkampitakis/fastify-template-server)
-[![Ask Me Anything !](https://img.shields.io/badge/Ask%20me-anything-1abc9c.svg)](https://twitter.com/g_kampitakis)
 
 ## Description
 
@@ -64,7 +62,3 @@ docker run --rm -p <host-port>:<server-port> --name fastify-template fastify-tem
 ## License
 
 MIT License
-
-<p align="center">
-✌️ <a href="https://github.com/gkampitakis/fastify-template-server/issues/new">For any questions or issues</a> ✌️
-</p>
