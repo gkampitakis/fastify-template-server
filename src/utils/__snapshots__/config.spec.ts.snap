@@ -16,7 +16,6 @@ Object {
   "server": Object {
     "port": 4000,
   },
-  "shutdownDelay": 5000,
 }
 `;
 
@@ -55,7 +54,6 @@ Object {
   "server": Object {
     "port": 4000,
   },
-  "shutdownDelay": 5000,
 }
 `;
 

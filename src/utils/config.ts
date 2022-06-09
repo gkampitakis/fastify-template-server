@@ -1,12 +1,14 @@
 import dotenv from 'dotenv';
 import { P } from 'pino';
 
-dotenv.config();
-
 const isProduction = process.env.NODE_ENV === 'production';
 const isTest = process.env.NODE_ENV === 'test';
 
-export default {
+if (!isProduction) {
+  dotenv.config();
+}
+
+export const config = {
   server: {
     port: parseInt(process.env.PORT || '4000')
   },
@@ -18,8 +20,7 @@ export default {
     exposeFailure: !isProduction,
     info: { Service: process.env.SERVICE || '' },
     path: '/api/health'
-  },
-  shutdownDelay: 5000
+  }
 };
 
 export const logger: P.LoggerOptions = {

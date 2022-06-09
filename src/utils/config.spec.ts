@@ -8,7 +8,7 @@ describe('Configuration', () => {
     it('Default config', async () => {
       process.env.NODE_ENV = 'production';
       process.env.SERVICE = '';
-      const { default: config } = await import('./config');
+      const { config } = await import('./config');
 
       expect(config).toMatchSnapshot();
     });
@@ -25,7 +25,7 @@ describe('Configuration', () => {
   describe('Development config', () => {
     it('Default config', async () => {
       process.env.NODE_ENV = 'dev';
-      const { default: config } = await import('./config');
+      const { config } = await import('./config');
 
       expect(config).toMatchSnapshot();
     });
